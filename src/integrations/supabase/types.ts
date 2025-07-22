@@ -14,16 +14,291 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      consultations: {
+        Row: {
+          consultation_date: string | null
+          created_at: string
+          doctor_id: string
+          id: string
+          notes: string | null
+          report_url: string | null
+          status: string | null
+          treatment_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          consultation_date?: string | null
+          created_at?: string
+          doctor_id: string
+          id?: string
+          notes?: string | null
+          report_url?: string | null
+          status?: string | null
+          treatment_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          consultation_date?: string | null
+          created_at?: string
+          doctor_id?: string
+          id?: string
+          notes?: string | null
+          report_url?: string | null
+          status?: string | null
+          treatment_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consultations_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "doctors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consultations_treatment_id_fkey"
+            columns: ["treatment_id"]
+            isOneToOne: false
+            referencedRelation: "treatments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      doctors: {
+        Row: {
+          bio: string | null
+          consultation_fee: number | null
+          created_at: string
+          hospital: string
+          id: string
+          name: string
+          rating: number | null
+          slots: Json | null
+          specialization: string
+          updated_at: string
+          user_id: string
+          verified: boolean | null
+          years_experience: number | null
+        }
+        Insert: {
+          bio?: string | null
+          consultation_fee?: number | null
+          created_at?: string
+          hospital: string
+          id?: string
+          name: string
+          rating?: number | null
+          slots?: Json | null
+          specialization: string
+          updated_at?: string
+          user_id: string
+          verified?: boolean | null
+          years_experience?: number | null
+        }
+        Update: {
+          bio?: string | null
+          consultation_fee?: number | null
+          created_at?: string
+          hospital?: string
+          id?: string
+          name?: string
+          rating?: number | null
+          slots?: Json | null
+          specialization?: string
+          updated_at?: string
+          user_id?: string
+          verified?: boolean | null
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          country: string | null
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          country?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          country?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      stays: {
+        Row: {
+          amenities: string[] | null
+          city: string
+          created_at: string
+          description: string | null
+          hospital_proximity_km: number | null
+          id: string
+          image_url: string | null
+          name: string
+          price_per_night: number
+          rating: number | null
+          updated_at: string
+        }
+        Insert: {
+          amenities?: string[] | null
+          city: string
+          created_at?: string
+          description?: string | null
+          hospital_proximity_km?: number | null
+          id?: string
+          image_url?: string | null
+          name: string
+          price_per_night: number
+          rating?: number | null
+          updated_at?: string
+        }
+        Update: {
+          amenities?: string[] | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          hospital_proximity_km?: number | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          price_per_night?: number
+          rating?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tour_packages: {
+        Row: {
+          category: string | null
+          city: string
+          created_at: string
+          description: string | null
+          duration: string | null
+          highlights: string[] | null
+          id: string
+          image_url: string | null
+          price: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          city: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          highlights?: string[] | null
+          id?: string
+          image_url?: string | null
+          price: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          highlights?: string[] | null
+          id?: string
+          image_url?: string | null
+          price?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      treatments: {
+        Row: {
+          category: string | null
+          city: string
+          created_at: string
+          description: string | null
+          duration: string | null
+          featured: boolean | null
+          id: string
+          image_url: string | null
+          price_inr: number
+          price_usd: number
+          savings_percent: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          city: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          price_inr: number
+          price_usd: number
+          savings_percent?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          price_inr?: number
+          price_usd?: number
+          savings_percent?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { user_uuid?: string }
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      user_role: "patient" | "doctor" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +425,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["patient", "doctor", "admin"],
+    },
   },
 } as const
