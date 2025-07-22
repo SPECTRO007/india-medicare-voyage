@@ -10,8 +10,11 @@ import {
   Activity,
   Plus
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Treatments = () => {
+  const navigate = useNavigate();
+  
   const treatments = [
     {
       icon: Heart,
@@ -153,7 +156,7 @@ const Treatments = () => {
 
                 {/* CTA */}
                 <div className="pt-2">
-                  <Button variant="default" size="sm" className="w-full">
+                  <Button variant="default" size="sm" className="w-full" onClick={() => navigate('/treatments')}>
                     View Details
                   </Button>
                 </div>
@@ -189,10 +192,10 @@ const Treatments = () => {
               Contact our medical advisors for personalized treatment options.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg">
+              <Button variant="hero" size="lg" onClick={() => navigate('/treatments')}>
                 Get Custom Treatment Plan
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => navigate('/treatments')}>
                 Browse All Treatments
               </Button>
             </div>

@@ -7,6 +7,12 @@ import { AuthProvider } from "./hooks/useAuth";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Treatments from "./pages/Treatments";
+import Doctors from "./pages/Doctors";
+import Consultations from "./pages/Consultations";
+import TourPackages from "./pages/TourPackages";
+import Stays from "./pages/Stays";
+import Flights from "./pages/Flights";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -25,12 +31,12 @@ const App = () => (
             
             {/* Protected Routes */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/treatments" element={<ProtectedRoute><div>Treatments</div></ProtectedRoute>} />
-            <Route path="/doctors" element={<ProtectedRoute><div>Doctors</div></ProtectedRoute>} />
-            <Route path="/consultations" element={<ProtectedRoute><div>Consultations</div></ProtectedRoute>} />
-            <Route path="/tour-packages" element={<ProtectedRoute><div>Tour Packages</div></ProtectedRoute>} />
-            <Route path="/stays" element={<ProtectedRoute><div>Accommodation</div></ProtectedRoute>} />
-            <Route path="/flights" element={<ProtectedRoute><div>Flights</div></ProtectedRoute>} />
+            <Route path="/treatments" element={<ProtectedRoute><Treatments /></ProtectedRoute>} />
+            <Route path="/doctors" element={<ProtectedRoute><Doctors /></ProtectedRoute>} />
+            <Route path="/consultations" element={<ProtectedRoute><Consultations /></ProtectedRoute>} />
+            <Route path="/tour-packages" element={<ProtectedRoute><TourPackages /></ProtectedRoute>} />
+            <Route path="/stays" element={<ProtectedRoute><Stays /></ProtectedRoute>} />
+            <Route path="/flights" element={<ProtectedRoute><Flights /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><div>Profile</div></ProtectedRoute>} />
             
             {/* Catch-all */}

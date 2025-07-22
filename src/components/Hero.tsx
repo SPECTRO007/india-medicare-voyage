@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart, Shield, Star } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
       {/* Background Image with Overlay */}
@@ -71,6 +74,7 @@ const Hero = () => {
               size="lg" 
               className="text-lg px-8 py-4 h-14 animate-scale-in"
               style={{ animationDelay: '1.1s' }}
+              onClick={() => navigate('/treatments')}
             >
               Explore Treatments
               <ArrowRight className="w-5 h-5" />
@@ -81,6 +85,7 @@ const Hero = () => {
               size="lg" 
               className="text-lg px-8 py-4 h-14 text-white border-white hover:bg-white hover:text-primary animate-scale-in"
               style={{ animationDelay: '1.3s' }}
+              onClick={() => navigate('/auth')}
             >
               Free Consultation
             </Button>

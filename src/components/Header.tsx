@@ -1,15 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Menu, Phone, Mail } from "lucide-react";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navigation = [
-    { name: "Treatments", href: "#treatments" },
+    { name: "Treatments", href: "/treatments" },
     { name: "Destinations", href: "#cities" },
-    { name: "Tour Packages", href: "#packages" },
-    { name: "Doctors", href: "#doctors" },
+    { name: "Tour Packages", href: "/tour-packages" },
+    { name: "Doctors", href: "/doctors" },
     { name: "About", href: "#about" }
   ];
 
@@ -53,22 +55,32 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
-              >
-                {item.name}
-              </a>
+              item.href.startsWith('#') ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => navigate('/auth')}>
               Sign In
             </Button>
-            <Button variant="hero" size="sm">
+            <Button variant="hero" size="sm" onClick={() => navigate('/auth')}>
               Free Consultation
             </Button>
           </div>
@@ -87,20 +99,31 @@ const Header = () => {
           <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg">
             <div className="container mx-auto px-4 py-4 space-y-4">
               {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="block text-foreground hover:text-primary transition-colors font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+                item.href.startsWith('#') ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="block text-foreground hover:text-primary transition-colors font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="block text-foreground hover:text-primary transition-colors font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <div className="border-t pt-4 space-y-2">
-                <Button variant="ghost" size="sm" className="w-full justify-start">
+                <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => navigate('/auth')}>
                   Sign In
                 </Button>
-                <Button variant="hero" size="sm" className="w-full">
+                <Button variant="hero" size="sm" className="w-full" onClick={() => navigate('/auth')}>
                   Free Consultation
                 </Button>
               </div>
