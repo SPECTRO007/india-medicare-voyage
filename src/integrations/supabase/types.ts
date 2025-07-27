@@ -14,6 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          consultation_id: string
+          content: string
+          created_at: string
+          file_url: string | null
+          id: string
+          message_type: string
+          read_at: string | null
+          sender_id: string
+          sender_type: string
+        }
+        Insert: {
+          consultation_id: string
+          content: string
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          message_type?: string
+          read_at?: string | null
+          sender_id: string
+          sender_type: string
+        }
+        Update: {
+          consultation_id?: string
+          content?: string
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          message_type?: string
+          read_at?: string | null
+          sender_id?: string
+          sender_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_consultation_id_fkey"
+            columns: ["consultation_id"]
+            isOneToOne: false
+            referencedRelation: "consultations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       consultations: {
         Row: {
           consultation_date: string | null
@@ -71,11 +115,16 @@ export type Database = {
       doctors: {
         Row: {
           bio: string | null
+          certifications: string[] | null
           consultation_fee: number | null
           created_at: string
+          education: string | null
           hospital: string
+          hospital_id: string | null
           id: string
+          languages: string[] | null
           name: string
+          phone: string | null
           rating: number | null
           slots: Json | null
           specialization: string
@@ -86,11 +135,16 @@ export type Database = {
         }
         Insert: {
           bio?: string | null
+          certifications?: string[] | null
           consultation_fee?: number | null
           created_at?: string
+          education?: string | null
           hospital: string
+          hospital_id?: string | null
           id?: string
+          languages?: string[] | null
           name: string
+          phone?: string | null
           rating?: number | null
           slots?: Json | null
           specialization: string
@@ -101,11 +155,16 @@ export type Database = {
         }
         Update: {
           bio?: string | null
+          certifications?: string[] | null
           consultation_fee?: number | null
           created_at?: string
+          education?: string | null
           hospital?: string
+          hospital_id?: string | null
           id?: string
+          languages?: string[] | null
           name?: string
+          phone?: string | null
           rating?: number | null
           slots?: Json | null
           specialization?: string
@@ -114,12 +173,152 @@ export type Database = {
           verified?: boolean | null
           years_experience?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "doctors_hospital_id_fkey"
+            columns: ["hospital_id"]
+            isOneToOne: false
+            referencedRelation: "hospitals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flight_bookings: {
+        Row: {
+          arrival_city: string
+          booking_reference: string | null
+          booking_status: string
+          consultation_id: string | null
+          created_at: string
+          departure_city: string
+          departure_date: string
+          flight_class: string
+          id: string
+          passenger_count: number
+          return_date: string | null
+          total_price: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          arrival_city: string
+          booking_reference?: string | null
+          booking_status?: string
+          consultation_id?: string | null
+          created_at?: string
+          departure_city: string
+          departure_date: string
+          flight_class?: string
+          id?: string
+          passenger_count?: number
+          return_date?: string | null
+          total_price?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          arrival_city?: string
+          booking_reference?: string | null
+          booking_status?: string
+          consultation_id?: string | null
+          created_at?: string
+          departure_city?: string
+          departure_date?: string
+          flight_class?: string
+          id?: string
+          passenger_count?: number
+          return_date?: string | null
+          total_price?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flight_bookings_consultation_id_fkey"
+            columns: ["consultation_id"]
+            isOneToOne: false
+            referencedRelation: "consultations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hospitals: {
+        Row: {
+          accreditations: string[] | null
+          address: string
+          city: string
+          country: string
+          created_at: string
+          description: string | null
+          email: string | null
+          emergency_available: boolean | null
+          icu_beds: number | null
+          id: string
+          image_url: string | null
+          latitude: number
+          longitude: number
+          name: string
+          phone: string | null
+          rating: number | null
+          specializations: string[] | null
+          state: string
+          total_beds: number | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          accreditations?: string[] | null
+          address: string
+          city: string
+          country?: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          emergency_available?: boolean | null
+          icu_beds?: number | null
+          id?: string
+          image_url?: string | null
+          latitude: number
+          longitude: number
+          name: string
+          phone?: string | null
+          rating?: number | null
+          specializations?: string[] | null
+          state: string
+          total_beds?: number | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          accreditations?: string[] | null
+          address?: string
+          city?: string
+          country?: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          emergency_available?: boolean | null
+          icu_beds?: number | null
+          id?: string
+          image_url?: string | null
+          latitude?: number
+          longitude?: number
+          name?: string
+          phone?: string | null
+          rating?: number | null
+          specializations?: string[] | null
+          state?: string
+          total_beds?: number | null
+          updated_at?: string
+          website?: string | null
+        }
         Relationships: []
       }
       profiles: {
         Row: {
           avatar_url: string | null
           country: string | null
+          country_code: string | null
           created_at: string
           email: string
           id: string
@@ -132,6 +331,7 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           country?: string | null
+          country_code?: string | null
           created_at?: string
           email: string
           id?: string
@@ -144,6 +344,7 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           country?: string | null
+          country_code?: string | null
           created_at?: string
           email?: string
           id?: string
@@ -292,6 +493,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_distance: {
+        Args: { lat1: number; lon1: number; lat2: number; lon2: number }
+        Returns: number
+      }
       get_user_role: {
         Args: { user_uuid?: string }
         Returns: Database["public"]["Enums"]["user_role"]
