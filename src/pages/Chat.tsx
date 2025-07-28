@@ -167,7 +167,7 @@ export default function Chat() {
         .order('created_at', { ascending: true });
 
       if (error) throw error;
-      setMessages(data || []);
+      setMessages((data || []) as Message[]);
     } catch (error) {
       console.error('Error fetching messages:', error);
     }

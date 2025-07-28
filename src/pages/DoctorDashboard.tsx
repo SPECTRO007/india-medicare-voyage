@@ -158,8 +158,12 @@ export default function DoctorDashboard() {
         .eq('doctor_id', doctorData.id)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setConsultations(data || []);
+        if (error) throw error;
+        const consultationsWithPatient = (data || []).map(consultation => ({
+          ...consultation,
+          patient: consultation.profiles
+        }));
+        setConsultations(consultationsWithPatient as Consultation[]);
     } catch (error) {
       console.error('Error fetching consultations:', error);
     }
