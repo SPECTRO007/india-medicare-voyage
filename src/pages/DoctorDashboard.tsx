@@ -149,21 +149,41 @@ export default function DoctorDashboard() {
 
       if (!doctorData) return;
 
-      const { data, error } = await supabase
+      // First get consultations
+      const { data: consultationsData, error: consultationsError } = await supabase
         .from('consultations')
-        .select(`
-          *,
-          profiles!consultations_user_id_fkey(name, email)
-        `)
+        .select('*')
         .eq('doctor_id', doctorData.id)
         .order('created_at', { ascending: false });
 
-        if (error) throw error;
-        const consultationsWithPatient = (data || []).map(consultation => ({
-          ...consultation,
-          patient: consultation.profiles
-        }));
-        setConsultations(consultationsWithPatient as Consultation[]);
+      if (consultationsError) throw consultationsError;
+
+      // Then get patient profiles for each consultation
+      if (consultationsData && consultationsData.length > 0) {
+        const userIds = consultationsData.map(c => c.user_id);
+        const { data: profilesData, error: profilesError } = await supabase
+          .from('profiles')
+          .select('user_id, name, email')
+          .in('user_id', userIds);
+
+        if (profilesError) throw profilesError;
+
+        // Combine the data
+        const consultationsWithPatient = consultationsData.map(consultation => {
+          const profile = profilesData?.find(p => p.user_id === consultation.user_id);
+          return {
+            ...consultation,
+            patient: {
+              name: profile?.name || 'Unknown Patient',
+              email: profile?.email || 'No email'
+            }
+          };
+        });
+
+        setConsultations(consultationsWithPatient);
+      } else {
+        setConsultations([]);
+      }
     } catch (error) {
       console.error('Error fetching consultations:', error);
     }
