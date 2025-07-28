@@ -1,1 +1,33 @@
 project_id = "brecacsjupkqnxodjkuc"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+enabled = true
+port = 54324
+smtp_port = 54325
+pop3_port = 54326
+
+[functions.flight-search]
+verify_jwt = false
+
+[functions.country-data]
+verify_jwt = false
+
+[auth]
+enabled = true
+port = 54325
+site_url = "https://4925ca5d-4cd3-43fb-b688-4202050f9ee3.lovableproject.com"
+additional_redirect_urls = ["https://localhost:3000"]
