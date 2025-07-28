@@ -221,7 +221,7 @@ export default function Auth() {
                         </SelectTrigger>
                         <SelectContent className="max-h-60 overflow-y-auto">
                           {countries.map((country) => (
-                            <SelectItem key={country.phoneCode} value={country.phoneCode}>
+                            <SelectItem key={`phone-${country.code}`} value={country.phoneCode}>
                               {country.phoneCode}
                             </SelectItem>
                           ))}

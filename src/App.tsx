@@ -13,6 +13,9 @@ import Consultations from "./pages/Consultations";
 import TourPackages from "./pages/TourPackages";
 import Stays from "./pages/Stays";
 import Flights from "./pages/Flights";
+import Hospitals from "./pages/Hospitals";
+import Chat from "./pages/Chat";
+import DoctorDashboard from "./pages/DoctorDashboard";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -37,6 +40,10 @@ const App = () => (
             <Route path="/tour-packages" element={<ProtectedRoute><TourPackages /></ProtectedRoute>} />
             <Route path="/stays" element={<ProtectedRoute><Stays /></ProtectedRoute>} />
             <Route path="/flights" element={<ProtectedRoute><Flights /></ProtectedRoute>} />
+            <Route path="/hospitals" element={<ProtectedRoute><Hospitals /></ProtectedRoute>} />
+            <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
+            <Route path="/chat/:consultationId" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
+            <Route path="/doctor-dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><div>Profile</div></ProtectedRoute>} />
             
             {/* Catch-all */}
