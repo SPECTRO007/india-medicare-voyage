@@ -14,6 +14,123 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics: {
+        Row: {
+          cost: number | null
+          created_at: string | null
+          event_data: Json | null
+          event_type: string
+          id: string
+          profit: number | null
+          revenue: number | null
+          user_id: string | null
+        }
+        Insert: {
+          cost?: number | null
+          created_at?: string | null
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          profit?: number | null
+          revenue?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          cost?: number | null
+          created_at?: string | null
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          profit?: number | null
+          revenue?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          booking_status: string | null
+          consultation_id: string | null
+          created_at: string | null
+          crypto_address: string | null
+          crypto_amount: number | null
+          crypto_currency: string | null
+          currency: string | null
+          drop_address: string | null
+          id: string
+          passport_country: string | null
+          passport_expiry: string | null
+          passport_number: string | null
+          payment_method: string | null
+          payment_status: string | null
+          payment_transaction_id: string | null
+          pickup_address: string | null
+          total_amount: number
+          tour_package_id: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          booking_status?: string | null
+          consultation_id?: string | null
+          created_at?: string | null
+          crypto_address?: string | null
+          crypto_amount?: number | null
+          crypto_currency?: string | null
+          currency?: string | null
+          drop_address?: string | null
+          id?: string
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_number?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
+          payment_transaction_id?: string | null
+          pickup_address?: string | null
+          total_amount: number
+          tour_package_id?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          booking_status?: string | null
+          consultation_id?: string | null
+          created_at?: string | null
+          crypto_address?: string | null
+          crypto_amount?: number | null
+          crypto_currency?: string | null
+          currency?: string | null
+          drop_address?: string | null
+          id?: string
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_number?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
+          payment_transaction_id?: string | null
+          pickup_address?: string | null
+          total_amount?: number
+          tour_package_id?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_consultation_id_fkey"
+            columns: ["consultation_id"]
+            isOneToOne: false
+            referencedRelation: "consultations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_tour_package_id_fkey"
+            columns: ["tour_package_id"]
+            isOneToOne: false
+            referencedRelation: "tour_packages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_messages: {
         Row: {
           consultation_id: string
@@ -179,65 +296,6 @@ export type Database = {
             columns: ["hospital_id"]
             isOneToOne: false
             referencedRelation: "hospitals"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      flight_bookings: {
-        Row: {
-          arrival_city: string
-          booking_reference: string | null
-          booking_status: string
-          consultation_id: string | null
-          created_at: string
-          departure_city: string
-          departure_date: string
-          flight_class: string
-          id: string
-          passenger_count: number
-          return_date: string | null
-          total_price: number | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          arrival_city: string
-          booking_reference?: string | null
-          booking_status?: string
-          consultation_id?: string | null
-          created_at?: string
-          departure_city: string
-          departure_date: string
-          flight_class?: string
-          id?: string
-          passenger_count?: number
-          return_date?: string | null
-          total_price?: number | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          arrival_city?: string
-          booking_reference?: string | null
-          booking_status?: string
-          consultation_id?: string | null
-          created_at?: string
-          departure_city?: string
-          departure_date?: string
-          flight_class?: string
-          id?: string
-          passenger_count?: number
-          return_date?: string | null
-          total_price?: number | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "flight_bookings_consultation_id_fkey"
-            columns: ["consultation_id"]
-            isOneToOne: false
-            referencedRelation: "consultations"
             referencedColumns: ["id"]
           },
         ]
