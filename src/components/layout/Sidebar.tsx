@@ -8,7 +8,10 @@ import {
   Bed, 
   Plane, 
   User,
-  Menu
+  Menu,
+  Shield,
+  Hospital,
+  MessageSquare
 } from 'lucide-react';
 import {
   Sidebar as SidebarComponent,
@@ -29,10 +32,15 @@ const navigationItems = [
   { title: 'Treatments', url: '/treatments', icon: Stethoscope },
   { title: 'Doctors', url: '/doctors', icon: UserCheck },
   { title: 'Consultations', url: '/consultations', icon: Calendar },
+  { title: 'Hospitals', url: '/hospitals', icon: Hospital },
   { title: 'Tour Packages', url: '/tour-packages', icon: MapPin },
   { title: 'Accommodation', url: '/stays', icon: Bed },
-  { title: 'Flights', url: '/flights', icon: Plane },
-  { title: 'Profile', url: '/profile', icon: User },
+  { title: 'Bookings', url: '/bookings', icon: Plane },
+  { title: 'Chat', url: '/chat', icon: MessageSquare },
+];
+
+const adminItems = [
+  { title: 'Admin Panel', url: '/admin', icon: Shield },
 ];
 
 export function Sidebar() {
@@ -88,6 +96,34 @@ export function Sidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              
+              {/* Admin Section */}
+              {profile?.role === 'admin' && (
+                <>
+                  {!collapsed && (
+                    <div className="px-3 py-2 mt-4">
+                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        Administration
+                      </h3>
+                    </div>
+                  )}
+                  {adminItems.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton asChild>
+                        <NavLink 
+                          to={item.url} 
+                          className={({ isActive }) => 
+                            `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${getNavClasses(isActive)}`
+                          }
+                        >
+                          <item.icon className="w-5 h-5 flex-shrink-0" />
+                          {!collapsed && <span>{item.title}</span>}
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
