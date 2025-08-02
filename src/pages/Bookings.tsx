@@ -11,6 +11,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Calendar, MapPin, CreditCard, Bitcoin, Plane, Package, Hospital } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import StripePayment from '@/components/payment/StripePayment';
+import RazorpayPayment from '@/components/payment/RazorpayPayment';
+import CryptoPayment from '@/components/payment/CryptoPayment';
 
 interface Booking {
   id: string;
@@ -66,6 +70,11 @@ export default function Bookings() {
   const [pickupAddress, setPickupAddress] = useState('');
   const [dropAddress, setDropAddress] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'razorpay' | 'crypto'>('stripe');
+  const [showPaymentModal, setShowPaymentModal] = useState<{
+    type: 'stripe' | 'razorpay' | 'crypto';
+    bookingId: string;
+    amount: number;
+  } | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -183,27 +192,15 @@ export default function Bookings() {
   };
 
   const handleStripePayment = async (bookingId: string) => {
-    // Placeholder for Stripe integration
-    toast({
-      title: "Stripe Payment",
-      description: "Stripe payment integration needed. Redirecting to payment...",
-    });
+    setShowPaymentModal({ type: 'stripe', bookingId, amount: calculateTotal() });
   };
 
   const handleRazorpayPayment = async (bookingId: string) => {
-    // Placeholder for Razorpay integration
-    toast({
-      title: "Razorpay Payment",
-      description: "Razorpay payment integration needed. Redirecting to payment...",
-    });
+    setShowPaymentModal({ type: 'razorpay', bookingId, amount: calculateTotal() });
   };
 
   const handleCryptoPayment = async (bookingId: string) => {
-    // Placeholder for crypto payment
-    toast({
-      title: "Crypto Payment",
-      description: "Crypto payment integration needed. Wallet address will be provided.",
-    });
+    setShowPaymentModal({ type: 'crypto', bookingId, amount: calculateTotal() });
   };
 
   const getStatusColor = (status: string) => {
@@ -455,6 +452,52 @@ export default function Bookings() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Payment Modal */}
+      <Dialog open={!!showPaymentModal} onOpenChange={() => setShowPaymentModal(null)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Complete Payment</DialogTitle>
+          </DialogHeader>
+          {showPaymentModal && (
+            <>
+              {showPaymentModal.type === 'stripe' && (
+                <StripePayment
+                  bookingId={showPaymentModal.bookingId}
+                  amount={showPaymentModal.amount}
+                  onSuccess={() => {
+                    setShowPaymentModal(null);
+                    fetchData();
+                  }}
+                  onCancel={() => setShowPaymentModal(null)}
+                />
+              )}
+              {showPaymentModal.type === 'razorpay' && (
+                <RazorpayPayment
+                  bookingId={showPaymentModal.bookingId}
+                  amount={showPaymentModal.amount}
+                  onSuccess={() => {
+                    setShowPaymentModal(null);
+                    fetchData();
+                  }}
+                  onCancel={() => setShowPaymentModal(null)}
+                />
+              )}
+              {showPaymentModal.type === 'crypto' && (
+                <CryptoPayment
+                  bookingId={showPaymentModal.bookingId}
+                  amount={showPaymentModal.amount}
+                  onSuccess={() => {
+                    setShowPaymentModal(null);
+                    fetchData();
+                  }}
+                  onCancel={() => setShowPaymentModal(null)}
+                />
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
