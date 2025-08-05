@@ -35,23 +35,23 @@ const Hero = () => {
       <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            World-Class Healthcare
-            <span className="block text-secondary">at Indian Prices</span>
+            Global Medical Excellence
+            <span className="block text-secondary">Worldwide Access</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Access premium medical treatments in India's top hospitals. Save up to 70% while experiencing 
-            exceptional care from internationally trained doctors.
+            Connect with verified hospitals and world-class doctors globally. Experience premium healthcare 
+            with transparent pricing and comprehensive support.
           </p>
 
           {/* Key Stats */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.3s' }}>
-              <div className="text-3xl font-bold text-secondary">70%</div>
-              <div className="text-sm text-white/80">Cost Savings</div>
+              <div className="text-3xl font-bold text-secondary">195+</div>
+              <div className="text-sm text-white/80">Countries Served</div>
             </div>
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.5s' }}>
-              <div className="text-3xl font-bold text-secondary">500+</div>
+              <div className="text-3xl font-bold text-secondary">1000+</div>
               <div className="text-sm text-white/80">Partner Hospitals</div>
             </div>
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.7s' }}>

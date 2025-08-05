@@ -21,7 +21,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to start your medical journey?</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Create an account to explore treatments, connect with doctors, and plan your medical trip to India.
+            Create an account to explore treatments, connect with hospitals and doctors worldwide, and plan your medical journey.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" onClick={() => navigate('/auth')}>

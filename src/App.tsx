@@ -15,6 +15,8 @@ import Stays from "./pages/Stays";
 import Bookings from "./pages/Bookings";
 import AdminDashboard from "./pages/AdminDashboard";
 import Hospitals from "./pages/Hospitals";
+import HospitalDetail from "./pages/HospitalDetail";
+import DoctorDetail from "./pages/DoctorDetail";
 import Chat from "./pages/Chat";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import NotFound from "./pages/NotFound";
@@ -43,6 +45,8 @@ const App = () => (
             <Route path="/bookings" element={<ProtectedRoute><Bookings /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path="/hospitals" element={<ProtectedRoute><Hospitals /></ProtectedRoute>} />
+            <Route path="/hospital/:id" element={<ProtectedRoute><HospitalDetail /></ProtectedRoute>} />
+            <Route path="/doctor/:id" element={<ProtectedRoute><DoctorDetail /></ProtectedRoute>} />
             <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
             <Route path="/chat/:consultationId" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
             <Route path="/doctor-dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />

@@ -9,7 +9,7 @@ const Header = () => {
 
   const navigation = [
     { name: "Treatments", href: "/treatments" },
-    { name: "Destinations", href: "#cities" },
+    { name: "Hospitals", href: "/hospitals" },
     { name: "Tour Packages", href: "/tour-packages" },
     { name: "Doctors", href: "/doctors" },
     { name: "About", href: "#about" }
@@ -28,11 +28,11 @@ const Header = () => {
               </div>
               <div className="hidden sm:flex items-center gap-1">
                 <Mail className="w-3 h-3" />
-                <span>support@indiamedical.com</span>
+                <span>support@medglobal.com</span>
               </div>
             </div>
             <div className="text-xs">
-              ✈ Free consultation • 🛡️ JCI accredited • 💰 70% savings
+              🌍 Global Network • 🛡️ Verified Hospitals • 💰 Transparent Pricing
             </div>
           </div>
         </div>
@@ -43,12 +43,14 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <Heart className="w-6 h-6 text-white" />
-            </div>
+            <img 
+              src="/lovable-uploads/c876325c-5cff-4ad3-9618-2a29d53a49c0.png" 
+              alt="MedGlobal Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <div>
-              <div className="font-bold text-xl text-foreground">MediIndia</div>
-              <div className="text-xs text-muted-foreground -mt-1">Medical Tourism</div>
+              <div className="font-bold text-xl text-foreground">MedGlobal</div>
+              <div className="text-xs text-muted-foreground -mt-1">Global Medical Tourism</div>
             </div>
           </div>
 
