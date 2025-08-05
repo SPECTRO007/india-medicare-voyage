@@ -18,19 +18,6 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-primary-light/30" />
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-20 right-20 animate-float">
-        <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-          <Heart className="w-8 h-8 text-white" />
-        </div>
-      </div>
-      
-      <div className="absolute bottom-32 left-20 animate-float" style={{ animationDelay: '1s' }}>
-        <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-          <Shield className="w-10 h-10 text-white" />
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
         <div className="animate-fade-in">

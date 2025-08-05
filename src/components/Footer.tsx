@@ -13,7 +13,7 @@ const Footer = () => {
                 <Heart className="w-6 h-6 text-white" />
               </div>
               <div>
-                <div className="font-bold text-xl">MediIndia</div>
+                <div className="font-bold text-xl">MedGlobal</div>
                 <div className="text-sm text-primary-foreground/80">Medical Tourism</div>
               </div>
             </div>
@@ -27,15 +27,15 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                <span className="text-sm">+1-800-MEDICAL (24/7)</span>
+                <span className="text-sm">+91-8592857418 (24/7)</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">support@indiamedical.com</span>
+                <span className="text-sm">medglobal.zync@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span className="text-sm">New York, USA & Chennai, India</span>
+                <span className="text-sm">Manipal, Karnataka, India</span>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@ const Footer = () => {
 
             <div className="text-center md:text-right text-sm text-primary-foreground/80">
               <div className="mb-1">
-                © 2024 MediIndia Medical Tourism. All rights reserved.
+                © 2025 MedGlobal Medical Tourism. All rights reserved.
               </div>
               <div className="space-x-4">
                 <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

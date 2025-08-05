@@ -143,7 +143,7 @@ const Treatments = () => {
                   <div className="space-y-1">
                     <div className="text-2xl font-bold text-primary">{treatment.priceRange}</div>
                     <div className="text-xs text-muted-foreground line-through">
-                      Western Price: {treatment.westernPrice}
+                      International Price: {treatment.westernPrice}
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-sm">

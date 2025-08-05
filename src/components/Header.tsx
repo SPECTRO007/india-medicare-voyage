@@ -24,11 +24,11 @@ const Header = () => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
                 <Phone className="w-3 h-3" />
-                <span>+1-800-MEDICAL</span>
+                <span>+91-8592857418</span>
               </div>
               <div className="hidden sm:flex items-center gap-1">
                 <Mail className="w-3 h-3" />
-                <span>support@medglobal.com</span>
+                <span>medglobal.zync@gmail.com</span>
               </div>
             </div>
             <div className="text-xs">
@@ -44,7 +44,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img 
-              src="/lovable-uploads/c876325c-5cff-4ad3-9618-2a29d53a49c0.png" 
+              src="MEDGLOBAL_logo.png" 
               alt="MedGlobal Logo" 
               className="w-10 h-10 object-contain"
             />
