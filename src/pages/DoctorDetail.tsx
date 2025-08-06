@@ -78,15 +78,36 @@ const DoctorDetail = () => {
       const { data: reviewsData, error: reviewsError } = await supabase
         .from('doctor_reviews')
         .select(`
-          *,
-          user:profiles(name)
+          id,
+          rating,
+          comment,
+          created_at,
+          doctor_id,
+          user_id
         `)
         .eq('doctor_id', id)
         .order('created_at', { ascending: false })
         .limit(10);
 
       if (reviewsError) throw reviewsError;
-      setReviews(reviewsData || []);
+      
+      // Fetch user names separately
+      const reviewsWithUsers = await Promise.all(
+        (reviewsData || []).map(async (review) => {
+          const { data: userData } = await supabase
+            .from('profiles')
+            .select('name')
+            .eq('user_id', review.user_id)
+            .single();
+          
+          return {
+            ...review,
+            user: { name: userData?.name || 'Anonymous' }
+          };
+        })
+      );
+      
+      setReviews(reviewsWithUsers);
       
     } catch (error) {
       console.error('Error fetching doctor details:', error);
