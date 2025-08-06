@@ -17,10 +17,6 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('patient');
-  const [country, setCountry] = useState('');
-  const [countryCode, setCountryCode] = useState('+1');
-  const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   
   const { signIn, signUp, user } = useAuth();
@@ -58,30 +54,53 @@ export default function Auth() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    
-    const { error } = await signUp(email, password, {
-      name,
-      role,
-      country,
-      phone,
-      country_code: countryCode
-    });
-    
-    if (error) {
+    if (!email || !password) {
       toast({
-        title: "Sign Up Failed",
-        description: error.message,
+        title: "Error",
+        description: "Please fill in email and password",
         variant: "destructive"
       });
-    } else {
-      toast({
-        title: "Account Created!",
-        description: "Please check your email to verify your account."
-      });
+      return;
     }
+
+    setLoading(true);
     
-    setLoading(false);
+    try {
+      // Determine role based on email
+      const isHospitalEmail = ['apollo.admin@medglobal.com', 'fortis.admin@medglobal.com', 'max.admin@medglobal.com'].includes(email);
+      const isAdminEmail = email === 'adigb@gmail.com';
+      
+      let role = 'patient';
+      if (isAdminEmail) role = 'admin';
+      else if (isHospitalEmail) role = 'hospital';
+      
+      const { error } = await signUp(email, password, {
+        name: name || (isAdminEmail ? 'Admin' : 'User'),
+        role
+      });
+      
+      if (error) {
+        toast({
+          title: "Sign Up Failed",
+          description: error.message,
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Account Created!",
+          description: "You can now sign in with your credentials."
+        });
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -92,7 +111,7 @@ export default function Auth() {
             <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
               <Stethoscope className="w-6 h-6 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold">MediTravel</h1>
+            <h1 className="text-2xl font-bold">MedGlobal</h1>
           </div>
           <p className="text-muted-foreground">Your gateway to affordable healthcare in India</p>
         </div>
@@ -145,13 +164,13 @@ export default function Auth() {
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name</Label>
+                    <Label htmlFor="signup-name">Full Name (optional)</Label>
                     <Input
                       id="signup-name"
                       type="text"
+                      placeholder="Enter your full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      required
                     />
                   </div>
                   
@@ -160,6 +179,7 @@ export default function Auth() {
                     <Input
                       id="signup-email"
                       type="email"
+                      placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -171,71 +191,11 @@ export default function Auth() {
                     <Input
                       id="signup-password"
                       type="password"
+                      placeholder="Create a password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="role">I am a</Label>
-                    <Select value={role} onValueChange={setRole}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="patient">Patient</SelectItem>
-                        <SelectItem value="doctor">Doctor</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="country">Country</Label>
-                    <Select value={country} onValueChange={(value) => {
-                      setCountry(value);
-                      const selectedCountry = countries.find(c => c.code === value);
-                      if (selectedCountry) {
-                        setCountryCode(selectedCountry.phoneCode);
-                      }
-                    }}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your country" />
-                      </SelectTrigger>
-                      <SelectContent className="max-h-60 overflow-y-auto">
-                        {countries.map((country) => (
-                          <SelectItem key={country.code} value={country.code}>
-                            {country.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <div className="flex gap-2">
-                      <Select value={countryCode} onValueChange={setCountryCode}>
-                        <SelectTrigger className="w-24">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-60 overflow-y-auto">
-                          {countries.map((country) => (
-                            <SelectItem key={`phone-${country.code}`} value={country.phoneCode}>
-                              {country.phoneCode}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="Enter phone number"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="flex-1"
-                      />
-                    </div>
                   </div>
                   
                   <Button type="submit" className="w-full" disabled={loading}>

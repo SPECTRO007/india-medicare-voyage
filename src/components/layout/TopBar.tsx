@@ -22,11 +22,11 @@ export function TopBar() {
   };
 
   return (
-    <header className="h-16 bg-card border-b flex items-center justify-between px-6">
-      <div className="flex items-center gap-4">
+    <header className="h-16 bg-card border-b flex items-center justify-between px-3 md:px-6">
+      <div className="flex items-center gap-2 md:gap-4">
         <SidebarTrigger className="h-8 w-8" />
         
-        <div className="relative max-w-md">
+        <div className="relative max-w-md hidden md:block">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input 
             placeholder="Search treatments, doctors..." 
@@ -35,8 +35,8 @@ export function TopBar() {
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" className="relative">
+      <div className="flex items-center gap-2 md:gap-4">
+        <Button variant="ghost" size="icon" className="relative hidden md:flex">
           <Bell className="w-5 h-5" />
           <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
         </Button>
@@ -47,7 +47,7 @@ export function TopBar() {
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                 <User className="w-4 h-4 text-primary" />
               </div>
-              <div className="text-left">
+              <div className="text-left hidden md:block">
                 <p className="text-sm font-medium">{profile?.name || user?.email}</p>
                 <p className="text-xs text-muted-foreground capitalize">{profile?.role || 'Patient'}</p>
               </div>
