@@ -23,8 +23,14 @@ export default function Dashboard() {
       return;
     }
     
+    // Redirect admin users to admin dashboard
+    if (profile?.role === 'admin') {
+      navigate('/admin');
+      return;
+    }
+    
     fetchDashboardData();
-  }, [user, navigate]);
+  }, [user, profile, navigate]);
 
   const fetchDashboardData = async () => {
     try {

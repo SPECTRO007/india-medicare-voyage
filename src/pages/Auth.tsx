@@ -25,7 +25,13 @@ export default function Auth() {
 
   useEffect(() => {
     if (user) {
-      navigate('/dashboard');
+      // Check user role from metadata and redirect accordingly
+      const userRole = user.user_metadata?.role;
+      if (userRole === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     }
   }, [user, navigate]);
 
@@ -46,7 +52,13 @@ export default function Auth() {
         title: "Welcome back!",
         description: "You have successfully signed in."
       });
-      navigate('/dashboard');
+      // Check user role and redirect accordingly
+      const userRole = user?.user_metadata?.role;
+      if (userRole === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     }
     
     setLoading(false);

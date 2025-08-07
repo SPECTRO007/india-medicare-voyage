@@ -67,9 +67,22 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is admin
-  if (!user || profile?.role !== 'admin') {
+  // Check if user is admin - wait for profile to load
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+  
+  if (profile && profile.role !== 'admin') {
     return <Navigate to="/dashboard" replace />;
+  }
+  
+  // Show loading while profile is still loading
+  if (!profile) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   useEffect(() => {

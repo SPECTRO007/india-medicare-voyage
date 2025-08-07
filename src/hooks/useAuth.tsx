@@ -22,16 +22,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   const refreshProfile = async () => {
-    if (!user) return;
+    if (!user) {
+      setProfile(null);
+      return;
+    }
     
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('user_id', user.id)
         .single();
       
-      setProfile(data);
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
+        console.error('Error fetching profile:', error);
+        return;
+      }
+      
+      setProfile(data || null);
     } catch (error) {
       console.error('Error fetching profile:', error);
     }
