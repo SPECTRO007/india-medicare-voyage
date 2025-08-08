@@ -6,16 +6,15 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  Users, 
-  DollarSign, 
-  TrendingUp, 
-  Package, 
+import {
+  Users,
+  DollarSign,
+  TrendingUp,
+  Package,
   Hospital,
   Eye,
   CheckCircle,
-  XCircle,
-  Clock
+  XCircle
 } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 
@@ -53,7 +52,7 @@ interface User {
 }
 
 export default function AdminDashboard() {
-  const { user, profile } = useAuth();
+  const { user, profile, loading } = useAuth();
   const { toast } = useToast();
   const [analytics, setAnalytics] = useState<Analytics>({
     total_revenue: 0,
@@ -65,22 +64,29 @@ export default function AdminDashboard() {
   });
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingData, setLoadingData] = useState(true);
 
-  // Check if user is admin - wait for profile to load
-  if (!user) {
-    return <Navigate to="/auth" replace />;
-  }
-  
-  if (profile && profile.role !== 'admin') {
-    return <Navigate to="/dashboard" replace />;
-  }
-  
-  // Show loading while profile is still loading
-  if (!profile) {
+  // Handle loading state from auth
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  if (profile && profile.role !== 'admin') {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  if (!profile) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-gray-500">Profile not found. Please contact support or create one.</p>
       </div>
     );
   }
@@ -91,9 +97,8 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      setLoading(true);
+      setLoadingData(true);
 
-      // Fetch analytics summary
       const { data: analyticsData } = await supabase
         .from('analytics')
         .select('revenue, cost, profit');
@@ -102,17 +107,14 @@ export default function AdminDashboard() {
       const totalCost = analyticsData?.reduce((sum, row) => sum + (row.cost || 0), 0) || 0;
       const totalProfit = analyticsData?.reduce((sum, row) => sum + (row.profit || 0), 0) || 0;
 
-      // Fetch bookings count
       const { count: bookingsCount } = await supabase
         .from('bookings')
         .select('*', { count: 'exact', head: true });
 
-      // Fetch users count
       const { count: usersCount } = await supabase
         .from('profiles')
         .select('*', { count: 'exact', head: true });
 
-      // Fetch consultations count
       const { count: consultationsCount } = await supabase
         .from('consultations')
         .select('*', { count: 'exact', head: true });
@@ -126,14 +128,12 @@ export default function AdminDashboard() {
         total_consultations: consultationsCount || 0,
       });
 
-      // Fetch recent bookings
       const { data: bookingsData } = await supabase
         .from('bookings')
         .select('*')
         .order('created_at', { ascending: false })
         .limit(10);
 
-      // Fetch user profiles separately and combine
       const bookingsWithProfiles = await Promise.all(
         (bookingsData || []).map(async (booking) => {
           const { data: profile } = await supabase
@@ -141,7 +141,7 @@ export default function AdminDashboard() {
             .select('name, email')
             .eq('user_id', booking.user_id)
             .single();
-          
+
           return {
             ...booking,
             profiles: profile || { name: 'Unknown', email: 'Unknown' }
@@ -151,7 +151,6 @@ export default function AdminDashboard() {
 
       setBookings(bookingsWithProfiles);
 
-      // Fetch all users
       const { data: usersData } = await supabase
         .from('profiles')
         .select('*')
@@ -167,7 +166,7 @@ export default function AdminDashboard() {
         variant: "destructive",
       });
     } finally {
-      setLoading(false);
+      setLoadingData(false);
     }
   };
 
@@ -215,7 +214,7 @@ export default function AdminDashboard() {
     }
   };
 
-  if (loading) {
+  if (loadingData) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
