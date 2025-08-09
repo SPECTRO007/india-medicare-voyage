@@ -22,33 +22,32 @@ const Hero = () => {
       <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Global Medical Excellence
-            <span className="block text-secondary">Worldwide Access</span>
+            Medical Tourism in India
+            <span className="block text-secondary">World-class care, start to finish</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Connect with verified hospitals and world-class doctors globally. Experience premium healthcare 
-            with transparent pricing and comprehensive support.
+            Discover India’s leading hospitals and renowned specialists through our platform. From treatment planning to travel arrangements, we offer transparent pricing, personalized care, and end-to-end support — so you can focus on your health while we handle the rest.
           </p>
 
           {/* Key Stats */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.3s' }}>
-              <div className="text-3xl font-bold text-secondary">195+</div>
+              <div className="text-3xl font-bold text-secondary">0</div>
               <div className="text-sm text-white/80">Countries Served</div>
             </div>
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.5s' }}>
-              <div className="text-3xl font-bold text-secondary">1000+</div>
+              <div className="text-3xl font-bold text-secondary">0+</div>
               <div className="text-sm text-white/80">Partner Hospitals</div>
             </div>
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.7s' }}>
-              <div className="text-3xl font-bold text-secondary">50,000+</div>
+              <div className="text-3xl font-bold text-secondary">0</div>
               <div className="text-sm text-white/80">Happy Patients</div>
             </div>
             <div className="text-center animate-scale-in" style={{ animationDelay: '0.9s' }}>
               <div className="flex items-center gap-1">
                 <Star className="w-5 h-5 text-secondary fill-current" />
-                <span className="text-3xl font-bold text-secondary">4.9</span>
+                <span className="text-3xl font-bold text-secondary">0</span>
               </div>
               <div className="text-sm text-white/80">Patient Rating</div>
             </div>
@@ -67,15 +66,17 @@ const Hero = () => {
               <ArrowRight className="w-5 h-5" />
             </Button>
             
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8 py-4 h-14 text-white border-white hover:bg-white hover:text-primary animate-scale-in"
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-lg px-8 py-4 h-14 text-primary border-primary hover:bg-primary hover:text-white animate-scale-in"
               style={{ animationDelay: '1.3s' }}
               onClick={() => navigate('/auth')}
             >
               Free Consultation
             </Button>
+
+
           </div>
 
           <div className="mt-8 text-white/70 animate-fade-in" style={{ animationDelay: '1.5s' }}>
