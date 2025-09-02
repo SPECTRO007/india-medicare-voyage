@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -47,14 +47,50 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          ip_address: unknown | null
+          new_values: Json | null
+          old_values: Json | null
+          resource_id: string | null
+          resource_type: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          old_values?: Json | null
+          resource_id?: string | null
+          resource_type: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          ip_address?: unknown | null
+          new_values?: Json | null
+          old_values?: Json | null
+          resource_id?: string | null
+          resource_type?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       bookings: {
         Row: {
           booking_status: string | null
           consultation_id: string | null
           created_at: string | null
-          crypto_address: string | null
-          crypto_amount: number | null
-          crypto_currency: string | null
           currency: string | null
           drop_address: string | null
           id: string
@@ -74,9 +110,6 @@ export type Database = {
           booking_status?: string | null
           consultation_id?: string | null
           created_at?: string | null
-          crypto_address?: string | null
-          crypto_amount?: number | null
-          crypto_currency?: string | null
           currency?: string | null
           drop_address?: string | null
           id?: string
@@ -96,9 +129,6 @@ export type Database = {
           booking_status?: string | null
           consultation_id?: string | null
           created_at?: string | null
-          crypto_address?: string | null
-          crypto_amount?: number | null
-          crypto_currency?: string | null
           currency?: string | null
           drop_address?: string | null
           id?: string
@@ -215,39 +245,81 @@ export type Database = {
       }
       consultations: {
         Row: {
+          allergies: string | null
+          approved_at: string | null
           consultation_date: string | null
           created_at: string
+          current_medications: string | null
           doctor_id: string
+          doctor_notes: string | null
           id: string
+          medical_condition: string | null
+          medical_history: string | null
           notes: string | null
+          passport_country: string | null
+          passport_expiry: string | null
+          passport_number: string | null
+          preferred_travel_date: string | null
+          previous_surgeries: string | null
           report_url: string | null
+          reviewed_at: string | null
           status: string | null
+          symptoms: string | null
           treatment_id: string | null
           updated_at: string
+          urgency_level: string | null
           user_id: string
         }
         Insert: {
+          allergies?: string | null
+          approved_at?: string | null
           consultation_date?: string | null
           created_at?: string
+          current_medications?: string | null
           doctor_id: string
+          doctor_notes?: string | null
           id?: string
+          medical_condition?: string | null
+          medical_history?: string | null
           notes?: string | null
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_number?: string | null
+          preferred_travel_date?: string | null
+          previous_surgeries?: string | null
           report_url?: string | null
+          reviewed_at?: string | null
           status?: string | null
+          symptoms?: string | null
           treatment_id?: string | null
           updated_at?: string
+          urgency_level?: string | null
           user_id: string
         }
         Update: {
+          allergies?: string | null
+          approved_at?: string | null
           consultation_date?: string | null
           created_at?: string
+          current_medications?: string | null
           doctor_id?: string
+          doctor_notes?: string | null
           id?: string
+          medical_condition?: string | null
+          medical_history?: string | null
           notes?: string | null
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_number?: string | null
+          preferred_travel_date?: string | null
+          previous_surgeries?: string | null
           report_url?: string | null
+          reviewed_at?: string | null
           status?: string | null
+          symptoms?: string | null
           treatment_id?: string | null
           updated_at?: string
+          urgency_level?: string | null
           user_id?: string
         }
         Relationships: [
@@ -263,6 +335,59 @@ export type Database = {
             columns: ["treatment_id"]
             isOneToOne: false
             referencedRelation: "treatments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      doctor_portfolios: {
+        Row: {
+          after_image_url: string | null
+          before_image_url: string | null
+          case_type: string | null
+          created_at: string
+          description: string | null
+          doctor_id: string
+          id: string
+          patient_testimonial: string | null
+          success_rate: number | null
+          title: string
+          treatment_duration: string | null
+          updated_at: string
+        }
+        Insert: {
+          after_image_url?: string | null
+          before_image_url?: string | null
+          case_type?: string | null
+          created_at?: string
+          description?: string | null
+          doctor_id: string
+          id?: string
+          patient_testimonial?: string | null
+          success_rate?: number | null
+          title: string
+          treatment_duration?: string | null
+          updated_at?: string
+        }
+        Update: {
+          after_image_url?: string | null
+          before_image_url?: string | null
+          case_type?: string | null
+          created_at?: string
+          description?: string | null
+          doctor_id?: string
+          id?: string
+          patient_testimonial?: string | null
+          success_rate?: number | null
+          title?: string
+          treatment_duration?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "doctor_portfolios_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "doctors"
             referencedColumns: ["id"]
           },
         ]
@@ -403,6 +528,106 @@ export type Database = {
         }
         Relationships: []
       }
+      hospital_reviews: {
+        Row: {
+          created_at: string
+          helpful_count: number | null
+          hospital_id: string
+          id: string
+          patient_id: string
+          rating: number
+          review_text: string | null
+          treatment_type: string | null
+          updated_at: string
+          verified_stay: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          helpful_count?: number | null
+          hospital_id: string
+          id?: string
+          patient_id: string
+          rating: number
+          review_text?: string | null
+          treatment_type?: string | null
+          updated_at?: string
+          verified_stay?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          helpful_count?: number | null
+          hospital_id?: string
+          id?: string
+          patient_id?: string
+          rating?: number
+          review_text?: string | null
+          treatment_type?: string | null
+          updated_at?: string
+          verified_stay?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hospital_reviews_hospital_id_fkey"
+            columns: ["hospital_id"]
+            isOneToOne: false
+            referencedRelation: "hospitals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hospital_services: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          duration: string | null
+          featured: boolean | null
+          hospital_id: string
+          id: string
+          image_url: string | null
+          includes: string[] | null
+          name: string
+          price_range: string | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          featured?: boolean | null
+          hospital_id: string
+          id?: string
+          image_url?: string | null
+          includes?: string[] | null
+          name: string
+          price_range?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          featured?: boolean | null
+          hospital_id?: string
+          id?: string
+          image_url?: string | null
+          includes?: string[] | null
+          name?: string
+          price_range?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hospital_services_hospital_id_fkey"
+            columns: ["hospital_id"]
+            isOneToOne: false
+            referencedRelation: "hospitals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       hospitals: {
         Row: {
           accreditations: string[] | null
@@ -480,6 +705,53 @@ export type Database = {
           website?: string | null
         }
         Relationships: []
+      }
+      medical_records: {
+        Row: {
+          consultation_id: string
+          created_at: string
+          description: string | null
+          file_name: string
+          file_size: number | null
+          file_type: string
+          file_url: string
+          id: string
+          record_type: string | null
+          uploaded_by: string
+        }
+        Insert: {
+          consultation_id: string
+          created_at?: string
+          description?: string | null
+          file_name: string
+          file_size?: number | null
+          file_type: string
+          file_url: string
+          id?: string
+          record_type?: string | null
+          uploaded_by: string
+        }
+        Update: {
+          consultation_id?: string
+          created_at?: string
+          description?: string | null
+          file_name?: string
+          file_size?: number | null
+          file_type?: string
+          file_url?: string
+          id?: string
+          record_type?: string | null
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "medical_records_consultation_id_fkey"
+            columns: ["consultation_id"]
+            isOneToOne: false
+            referencedRelation: "consultations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -661,7 +933,7 @@ export type Database = {
     }
     Functions: {
       calculate_distance: {
-        Args: { lat1: number; lon1: number; lat2: number; lon2: number }
+        Args: { lat1: number; lat2: number; lon1: number; lon2: number }
         Returns: number
       }
       get_user_role: {

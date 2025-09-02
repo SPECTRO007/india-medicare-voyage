@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -44,13 +45,13 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-semibold text-lg">Medical Services</h3>
             <ul className="space-y-3 text-sm text-primary-foreground/90">
-              <li><a href="#" className="hover:text-white transition-colors">Cardiac Surgery</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Orthopedic Surgery</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Cancer Treatment</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Neurosurgery</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">IVF & Fertility</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Eye Care</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Cosmetic Surgery</a></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">Cardiac Surgery</Link></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">Orthopedic Surgery</Link></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">Cancer Treatment</Link></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">Neurosurgery</Link></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">IVF & Fertility</Link></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">Eye Care</Link></li>
+              <li><Link to="/treatments" className="hover:text-white transition-colors">Cosmetic Surgery</Link></li>
             </ul>
           </div>
 
@@ -58,12 +59,12 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-semibold text-lg">Destinations</h3>
             <ul className="space-y-3 text-sm text-primary-foreground/90">
-              <li><a href="#" className="hover:text-white transition-colors">Chennai</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Bengaluru</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Hyderabad</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Mumbai</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Delhi</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Kochi</a></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Chennai</Link></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Bengaluru</Link></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Hyderabad</Link></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Mumbai</Link></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Delhi</Link></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Kochi</Link></li>
             </ul>
           </div>
 
@@ -71,13 +72,13 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-semibold text-lg">Company</h3>
             <ul className="space-y-3 text-sm text-primary-foreground/90">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Our Mission</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Partner Hospitals</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Success Stories</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <li><span className="hover:text-white transition-colors cursor-pointer">About Us</span></li>
+              <li><span className="hover:text-white transition-colors cursor-pointer">Our Mission</span></li>
+              <li><Link to="/hospitals" className="hover:text-white transition-colors">Partner Hospitals</Link></li>
+              <li><span className="hover:text-white transition-colors cursor-pointer">Success Stories</span></li>
+              <li><span className="hover:text-white transition-colors cursor-pointer">Blog</span></li>
+              <li><span className="hover:text-white transition-colors cursor-pointer">Careers</span></li>
+              <li><span className="hover:text-white transition-colors cursor-pointer">Contact</span></li>
             </ul>
           </div>
         </div>
@@ -106,18 +107,18 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              <button className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              </button>
+              <button className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              </button>
+              <button className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+              </button>
+              <button className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
                 <Linkedin className="w-5 h-5" />
-              </a>
+              </button>
             </div>
 
             <div className="text-center md:text-right text-sm text-primary-foreground/80">
@@ -125,11 +126,11 @@ const Footer = () => {
                 © 2025 MedGlobal Medical Tourism. All rights reserved.
               </div>
               <div className="space-x-4">
-                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                <span className="hover:text-white transition-colors cursor-pointer">Privacy Policy</span>
                 <span>•</span>
-                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                <span className="hover:text-white transition-colors cursor-pointer">Terms of Service</span>
                 <span>•</span>
-                <a href="#" className="hover:text-white transition-colors">Medical Disclaimer</a>
+                <span className="hover:text-white transition-colors cursor-pointer">Medical Disclaimer</span>
               </div>
             </div>
           </div>
