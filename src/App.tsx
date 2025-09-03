@@ -19,6 +19,8 @@ import HospitalDetail from "./pages/HospitalDetail";
 import DoctorDetail from "./pages/DoctorDetail";
 import Chat from "./pages/Chat";
 import DoctorDashboard from "./pages/DoctorDashboard";
+import PassportVerification from "./pages/PassportVerification";
+import Payment from "./pages/Payment";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -50,6 +52,8 @@ const App = () => (
             <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
             <Route path="/chat/:consultationId" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
             <Route path="/doctor-dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
+            <Route path="/passport-verification" element={<ProtectedRoute><PassportVerification /></ProtectedRoute>} />
+            <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><div>Profile</div></ProtectedRoute>} />
             
             {/* Catch-all */}

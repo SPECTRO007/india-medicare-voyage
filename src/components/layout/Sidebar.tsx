@@ -58,8 +58,8 @@ export function Sidebar() {
       : "hover:bg-muted/50 text-muted-foreground hover:text-foreground";
 
   return (
-    <SidebarComponent className={collapsed ? "w-14" : "w-64"} collapsible="icon">
-      <SidebarContent className="bg-card border-r">
+    <SidebarComponent className={`${collapsed ? "w-14" : "w-64"} bg-card`} collapsible="icon">
+      <SidebarContent className="bg-card border-r h-full">
         <div className="p-4 border-b">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">

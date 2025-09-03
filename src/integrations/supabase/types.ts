@@ -753,6 +753,48 @@ export type Database = {
           },
         ]
       }
+      passport_verifications: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          id: string
+          passport_country: string | null
+          passport_expiry: string | null
+          passport_image_url: string
+          passport_number: string | null
+          selfie_image_url: string
+          updated_at: string
+          user_id: string
+          verification_status: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_image_url: string
+          passport_number?: string | null
+          selfie_image_url: string
+          updated_at?: string
+          user_id: string
+          verification_status?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          passport_country?: string | null
+          passport_expiry?: string | null
+          passport_image_url?: string
+          passport_number?: string | null
+          selfie_image_url?: string
+          updated_at?: string
+          user_id?: string
+          verification_status?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
