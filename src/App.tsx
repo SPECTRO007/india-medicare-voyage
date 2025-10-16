@@ -8,7 +8,6 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Treatments from "./pages/Treatments";
-import Doctors from "./pages/Doctors";
 import Consultations from "./pages/Consultations";
 import TourPackages from "./pages/TourPackages";
 import Stays from "./pages/Stays";
@@ -16,6 +15,7 @@ import Bookings from "./pages/Bookings";
 import AdminDashboard from "./pages/AdminDashboard";
 import Hospitals from "./pages/Hospitals";
 import HospitalDetail from "./pages/HospitalDetail";
+import HospitalDoctors from "./pages/HospitalDoctors";
 import DoctorDetail from "./pages/DoctorDetail";
 import Chat from "./pages/Chat";
 import DoctorDashboard from "./pages/DoctorDashboard";
@@ -40,7 +40,7 @@ const App = () => (
             {/* Protected Routes */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/treatments" element={<ProtectedRoute><Treatments /></ProtectedRoute>} />
-            <Route path="/doctors" element={<ProtectedRoute><Doctors /></ProtectedRoute>} />
+            
             <Route path="/consultations" element={<ProtectedRoute><Consultations /></ProtectedRoute>} />
             <Route path="/tour-packages" element={<ProtectedRoute><TourPackages /></ProtectedRoute>} />
             <Route path="/stays" element={<ProtectedRoute><Stays /></ProtectedRoute>} />
@@ -48,6 +48,7 @@ const App = () => (
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path="/hospitals" element={<ProtectedRoute><Hospitals /></ProtectedRoute>} />
             <Route path="/hospital/:id" element={<ProtectedRoute><HospitalDetail /></ProtectedRoute>} />
+            <Route path="/hospital/:hospitalId/doctors" element={<ProtectedRoute><HospitalDoctors /></ProtectedRoute>} />
             <Route path="/doctor/:id" element={<ProtectedRoute><DoctorDetail /></ProtectedRoute>} />
             <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
             <Route path="/chat/:consultationId" element={<ProtectedRoute><Chat /></ProtectedRoute>} />

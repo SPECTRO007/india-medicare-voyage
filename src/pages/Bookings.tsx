@@ -14,7 +14,6 @@ import { Calendar, MapPin, CreditCard, Bitcoin, Plane, Package, Hospital } from 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import StripePayment from '@/components/payment/StripePayment';
 import RazorpayPayment from '@/components/payment/RazorpayPayment';
-import CryptoPayment from '@/components/payment/CryptoPayment';
 
 interface Booking {
   id: string;
@@ -69,9 +68,9 @@ export default function Bookings() {
   const [passportCountry, setPassportCountry] = useState('');
   const [pickupAddress, setPickupAddress] = useState('');
   const [dropAddress, setDropAddress] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'razorpay' | 'crypto'>('stripe');
+  const [paymentMethod, setPaymentMethod] = useState<'stripe' | 'razorpay'>('stripe');
   const [showPaymentModal, setShowPaymentModal] = useState<{
-    type: 'stripe' | 'razorpay' | 'crypto';
+    type: 'stripe' | 'razorpay';
     bookingId: string;
     amount: number;
   } | null>(null);
@@ -161,8 +160,6 @@ export default function Bookings() {
         await handleStripePayment(data.id);
       } else if (paymentMethod === 'razorpay') {
         await handleRazorpayPayment(data.id);
-      } else if (paymentMethod === 'crypto') {
-        await handleCryptoPayment(data.id);
       }
 
       toast({
@@ -197,10 +194,6 @@ export default function Bookings() {
 
   const handleRazorpayPayment = async (bookingId: string) => {
     setShowPaymentModal({ type: 'razorpay', bookingId, amount: calculateTotal() });
-  };
-
-  const handleCryptoPayment = async (bookingId: string) => {
-    setShowPaymentModal({ type: 'crypto', bookingId, amount: calculateTotal() });
   };
 
   const getStatusColor = (status: string) => {
@@ -375,12 +368,6 @@ export default function Bookings() {
                             Razorpay (Indian Payments)
                           </div>
                         </SelectItem>
-                        <SelectItem value="crypto">
-                          <div className="flex items-center gap-2">
-                            <Bitcoin className="w-4 h-4" />
-                            Cryptocurrency
-                          </div>
-                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -474,17 +461,6 @@ export default function Bookings() {
               )}
               {showPaymentModal.type === 'razorpay' && (
                 <RazorpayPayment
-                  bookingId={showPaymentModal.bookingId}
-                  amount={showPaymentModal.amount}
-                  onSuccess={() => {
-                    setShowPaymentModal(null);
-                    fetchData();
-                  }}
-                  onCancel={() => setShowPaymentModal(null)}
-                />
-              )}
-              {showPaymentModal.type === 'crypto' && (
-                <CryptoPayment
                   bookingId={showPaymentModal.bookingId}
                   amount={showPaymentModal.amount}
                   onSuccess={() => {

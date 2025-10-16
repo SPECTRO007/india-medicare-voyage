@@ -30,7 +30,6 @@ import { useAuth } from '@/hooks/useAuth';
 const navigationItems = [
   { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
   { title: 'Treatments', url: '/treatments', icon: Stethoscope },
-  { title: 'Doctors', url: '/doctors', icon: UserCheck },
   { title: 'Consultations', url: '/consultations', icon: Calendar },
   { title: 'Hospitals', url: '/hospitals', icon: Hospital },
   { title: 'Tour Packages', url: '/tour-packages', icon: MapPin },

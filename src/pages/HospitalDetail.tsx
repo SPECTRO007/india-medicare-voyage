@@ -212,7 +212,14 @@ const HospitalDetail = () => {
 
       {/* Doctors Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-6">Our Doctors ({doctors.length})</h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold">Our Doctors ({doctors.length})</h2>
+          {doctors.length > 0 && (
+            <Button onClick={() => navigate(`/hospital/${id}/doctors`)}>
+              View All Doctors
+            </Button>
+          )}
+        </div>
         
         {doctors.length === 0 ? (
           <Card>

@@ -346,10 +346,21 @@ export default function Hospitals() {
                   )}
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate(`/hospital/${hospital.id}`)}
+                  >
                     View Details
                   </Button>
-                  <Button size="sm">
+                  <Button 
+                    size="sm"
+                    onClick={() => {
+                      if (hospital.phone) {
+                        window.location.href = `tel:${hospital.phone}`;
+                      }
+                    }}
+                  >
                     Contact Hospital
                   </Button>
                 </div>
