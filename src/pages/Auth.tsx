@@ -323,16 +323,24 @@ export default function Auth() {
                   <div className="space-y-2">
                     <Label htmlFor="signup-phone">Phone Number</Label>
                     <div className="flex gap-2">
-                      <Select value={countryCode} onValueChange={setCountryCode}>
-                        <SelectTrigger className="w-[140px]">
-                          <SelectValue />
+                      <Select value={countryCode} onValueChange={(value) => {
+                        setCountryCode(value);
+                      }}>
+                        <SelectTrigger className="w-[110px]">
+                          <SelectValue>
+                            <span className="flex items-center gap-1.5">
+                              <span className="text-lg">{countries.find(c => c.phone === countryCode)?.flag || '🌍'}</span>
+                              <span className="text-sm">{countryCode}</span>
+                            </span>
+                          </SelectValue>
                         </SelectTrigger>
-                        <SelectContent>
-                          {countries.map((c) => (
-                            <SelectItem key={c.code} value={c.phone}>
+                        <SelectContent className="max-h-[300px]">
+                          {countries.map((c, index) => (
+                            <SelectItem key={`${c.code}-${index}`} value={c.phone}>
                               <span className="flex items-center gap-2">
-                                <span className="text-xl">{c.flag}</span>
-                                <span>{c.phone}</span>
+                                <span className="text-lg">{c.flag}</span>
+                                <span className="text-sm font-medium">{c.phone}</span>
+                                <span className="text-xs text-muted-foreground">{c.name}</span>
                               </span>
                             </SelectItem>
                           ))}
@@ -341,10 +349,11 @@ export default function Auth() {
                       <Input
                         id="signup-phone"
                         type="tel"
-                        placeholder="Phone number"
+                        placeholder="Enter phone number"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         required
+                        className="flex-1"
                       />
                     </div>
                   </div>
