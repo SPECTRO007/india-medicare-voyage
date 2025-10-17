@@ -310,7 +310,10 @@ export default function Auth() {
                       <SelectContent>
                         {countries.map((c) => (
                           <SelectItem key={c.code} value={c.name}>
-                            {c.name}
+                            <span className="flex items-center gap-2">
+                              <span className="text-xl">{c.flag}</span>
+                              <span>{c.name}</span>
+                            </span>
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -321,13 +324,16 @@ export default function Auth() {
                     <Label htmlFor="signup-phone">Phone Number</Label>
                     <div className="flex gap-2">
                       <Select value={countryCode} onValueChange={setCountryCode}>
-                        <SelectTrigger className="w-[120px]">
+                        <SelectTrigger className="w-[140px]">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           {countries.map((c) => (
                             <SelectItem key={c.code} value={c.phone}>
-                              {c.phone} {c.name}
+                              <span className="flex items-center gap-2">
+                                <span className="text-xl">{c.flag}</span>
+                                <span>{c.phone}</span>
+                              </span>
                             </SelectItem>
                           ))}
                         </SelectContent>
