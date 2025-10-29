@@ -31,9 +31,7 @@ const Header = () => {
                 <span>medglobal.zync@gmail.com</span>
               </div>
             </div>
-            <div className="text-xs">
-              🌍 Global Network • 🛡️ Verified Hospitals • 💰 Transparent Pricing
-            </div>
+            
           </div>
         </div>
       </div>
