@@ -21,6 +21,7 @@ import Chat from "./pages/Chat";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import PassportVerification from "./pages/PassportVerification";
 import Payment from "./pages/Payment";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -55,7 +56,7 @@ const App = () => (
             <Route path="/doctor-dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
             <Route path="/passport-verification" element={<ProtectedRoute><PassportVerification /></ProtectedRoute>} />
             <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><div>Profile</div></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             
             {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
