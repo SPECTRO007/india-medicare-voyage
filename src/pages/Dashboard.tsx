@@ -154,14 +154,7 @@ export default function Dashboard() {
               <Stethoscope className="h-5 w-5" />
               Find Treatment
             </Button>
-            <Button 
-              onClick={() => navigate('/doctors')} 
-              variant="outline" 
-              className="h-16 flex flex-col gap-2"
-            >
-              <Users className="h-5 w-5" />
-              Book Doctor
-            </Button>
+            
             <Button 
               onClick={() => navigate('/consultations')} 
               variant="outline" 
