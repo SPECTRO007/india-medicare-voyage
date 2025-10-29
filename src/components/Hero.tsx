@@ -80,7 +80,7 @@ const Hero = () => {
           </div>
 
           <div className="mt-8 text-white/70 animate-fade-in" style={{ animationDelay: '1.5s' }}>
-            <p className="text-sm">✓ No hidden fees  ✓ 24/7 support  ✓ Verified hospitals</p>
+            
           </div>
         </div>
       </div>
