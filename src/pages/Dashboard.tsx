@@ -146,7 +146,7 @@ export default function Dashboard() {
           <CardDescription>Get started with your medical journey</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-40">
             <Button 
               onClick={() => navigate('/treatments')} 
               className="h-16 flex flex-col gap-2"
