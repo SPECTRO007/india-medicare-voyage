@@ -94,7 +94,7 @@ export default function Auth() {
     setLoading(true);
     
     try {
-      // Determine role based on email
+      // Role based here
       const isHospitalEmail = ['apollo.admin@medglobal.com', 'fortis.admin@medglobal.com', 'max.admin@medglobal.com'].includes(email);
       const isAdminEmail = email === 'adigb@gmail.com';
       
