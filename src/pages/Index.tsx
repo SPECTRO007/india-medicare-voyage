@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import Treatments from "@/components/Treatments";
 import Cities from "@/components/Cities";
+import HospitalShowcase from "@/components/HospitalShowcase";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -40,6 +41,7 @@ const Index = () => {
         <Hero />
         <Benefits />
         <Treatments />
+        <HospitalShowcase />
         <Cities />
         <div className="max-w-7xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to start your medical journey?</h2>

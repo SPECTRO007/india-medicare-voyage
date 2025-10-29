@@ -338,8 +338,8 @@ export default function Consultations() {
               <p className="text-muted-foreground mb-4">
                 Book your first consultation with a verified doctor
               </p>
-              <Button onClick={() => navigate('/doctors')}>
-                Find Doctors
+              <Button onClick={() => navigate('/hospitals')}>
+                Find Hospitals
               </Button>
             </CardContent>
           </Card>

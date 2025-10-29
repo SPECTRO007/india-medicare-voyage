@@ -5,15 +5,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { Stethoscope, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { countries } from '@/data/countries';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [country, setCountry] = useState('');
+  const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+1');
   const [loading, setLoading] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
@@ -104,7 +109,9 @@ export default function Auth() {
       
       const { error } = await signUp(email, password, {
         name: name || (isAdminEmail ? 'Admin' : 'User'),
-        role
+        role,
+        country,
+        phone: countryCode + phone
       });
       
       if (error) {
@@ -271,13 +278,14 @@ export default function Auth() {
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name (optional)</Label>
+                    <Label htmlFor="signup-name">Full Name</Label>
                     <Input
                       id="signup-name"
                       type="text"
                       placeholder="Enter your full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </div>
                   
@@ -291,6 +299,63 @@ export default function Auth() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-country">Country of Residence</Label>
+                    <Select value={country} onValueChange={setCountry} required>
+                      <SelectTrigger id="signup-country">
+                        <SelectValue placeholder="Select your country" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {countries.map((c) => (
+                          <SelectItem key={c.code} value={c.name}>
+                            <span className="flex items-center gap-2">
+                              <span className="text-xl">{c.flag}</span>
+                              <span>{c.name}</span>
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-phone">Phone Number</Label>
+                    <div className="flex gap-2">
+                      <Select value={countryCode} onValueChange={(value) => {
+                        setCountryCode(value);
+                      }}>
+                        <SelectTrigger className="w-[110px]">
+                          <SelectValue>
+                            <span className="flex items-center gap-1.5">
+                              <span className="text-lg">{countries.find(c => c.phone === countryCode)?.flag || '🌍'}</span>
+                              <span className="text-sm">{countryCode}</span>
+                            </span>
+                          </SelectValue>
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[300px]">
+                          {countries.map((c, index) => (
+                            <SelectItem key={`${c.code}-${index}`} value={c.phone}>
+                              <span className="flex items-center gap-2">
+                                <span className="text-lg">{c.flag}</span>
+                                <span className="text-sm font-medium">{c.phone}</span>
+                                <span className="text-xs text-muted-foreground">{c.name}</span>
+                              </span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <Input
+                        id="signup-phone"
+                        type="tel"
+                        placeholder="Enter phone number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        className="flex-1"
+                      />
+                    </div>
                   </div>
                   
                   <div className="space-y-2">
