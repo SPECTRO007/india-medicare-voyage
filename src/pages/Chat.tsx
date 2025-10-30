@@ -146,11 +146,7 @@ export default function Chat() {
       setConsultations(data || []);
     } catch (error) {
       console.error('Error fetching consultations:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load consultations",
-        variant: "destructive"
-      });
+      
     } finally {
       setLoading(false);
     }
@@ -192,11 +188,7 @@ export default function Chat() {
       setNewMessage('');
     } catch (error) {
       console.error('Error sending message:', error);
-      toast({
-        title: "Error",
-        description: "Failed to send message",
-        variant: "destructive"
-      });
+      
     } finally {
       setSending(false);
     }

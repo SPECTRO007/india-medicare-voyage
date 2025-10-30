@@ -37,7 +37,7 @@ export default function Profile() {
     name: '',
     phone: '',
     country: '',
-    country_code: '+1'
+    country_code: '+91'
   });
   
   // Avatar upload

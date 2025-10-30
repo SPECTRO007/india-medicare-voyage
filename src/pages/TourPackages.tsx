@@ -288,25 +288,6 @@ export default function TourPackages() {
           </CardContent>
         </Card>
       )}
-
-      {/* Custom Package CTA */}
-      <Card className="bg-gradient-to-r from-primary/5 to-secondary/5">
-        <CardContent className="p-8 text-center">
-          <h3 className="text-2xl font-bold mb-4">Need a Custom Package?</h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Can't find the perfect combination? Our travel experts can create a personalized 
-            medical tourism package tailored to your treatment needs and interests.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg">
-              Create Custom Package
-            </Button>
-            <Button variant="outline" size="lg">
-              Speak with Expert
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }
