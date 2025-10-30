@@ -294,7 +294,7 @@ export default function Chat() {
                     variant="outline" 
                     size="sm" 
                     className="mt-2"
-                    onClick={() => navigate('/doctors')}
+                    onClick={() => navigate('/hospitals')}
                   >
                     {profile?.role === 'doctor' ? 'View Patient Requests' : 'Find a Doctor'}
                   </Button>
