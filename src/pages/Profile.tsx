@@ -500,7 +500,7 @@ export default function Profile() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => window.open(doc.file_url, '_blank')}
+                            onClick={() => handleDownload(doc)}
                           >
                             <Download className="h-4 w-4 mr-1" />
                             Download
