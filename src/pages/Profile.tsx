@@ -172,7 +172,7 @@ export default function Profile() {
     setUploading(true);
     
     try {
-      // Upload to medical-records bucket
+      // Upload to medical-records bucket (private)
       const fileExt = documentFile.name.split('.').pop();
       const fileName = `${user.id}/${Date.now()}-${documentFile.name}`;
       
@@ -182,36 +182,16 @@ export default function Profile() {
       
       if (uploadError) throw uploadError;
       
-      const { data: { publicUrl } } = supabase.storage
-        .from('medical-records')
-        .getPublicUrl(fileName);
-      
-      // Create a temporary consultation for standalone medical records
-      let consultationId = null;
-      const { data: tempConsultation, error: consultError } = await supabase
-        .from('consultations')
-        .insert({
-          user_id: user.id,
-          doctor_id: '00000000-0000-0000-0000-000000000000', // Placeholder
-          status: 'pending',
-          medical_condition: 'General medical record'
-        })
-        .select()
-        .single();
-      
-      if (consultError) throw consultError;
-      consultationId = tempConsultation.id;
-      
-      // Save document metadata
+      // Save document metadata with consultation_id null and store file path (not public URL)
       const { error: dbError } = await supabase
         .from('medical_records')
         .insert({
-          consultation_id: consultationId,
+          consultation_id: null,
           uploaded_by: user.id,
           file_name: documentFile.name,
           file_type: documentFile.type,
           file_size: documentFile.size,
-          file_url: publicUrl,
+          file_url: fileName, // store the path; we'll generate signed URLs on demand
           record_type: documentType,
           description: documentDescription
         });
@@ -245,9 +225,12 @@ export default function Profile() {
 
   const handleDeleteDocument = async (documentId: string, fileUrl: string) => {
     try {
-      // Extract file path from URL
-      const urlParts = fileUrl.split('/medical-records/');
-      const filePath = urlParts[1];
+      // Determine file path: if URL contains bucket path, extract; otherwise treat as path
+      let filePath = fileUrl;
+      if (fileUrl.includes('/medical-records/')) {
+        const urlParts = fileUrl.split('/medical-records/');
+        filePath = urlParts[1];
+      }
       
       // Delete from storage
       const { error: storageError } = await supabase.storage
@@ -276,6 +259,28 @@ export default function Profile() {
         variant: "destructive",
         title: "Delete Failed",
         description: error.message || "Failed to delete document",
+      });
+    }
+  };
+  
+  const handleDownload = async (doc: MedicalDocument) => {
+    try {
+      // Determine file path
+      let filePath = doc.file_url;
+      if (filePath.includes('/medical-records/')) {
+        const urlParts = filePath.split('/medical-records/');
+        filePath = urlParts[1];
+      }
+      const { data, error } = await supabase.storage
+        .from('medical-records')
+        .createSignedUrl(filePath, 60);
+      if (error) throw error;
+      window.open(data.signedUrl, '_blank');
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Download Failed",
+        description: error.message || 'Unable to generate download link',
       });
     }
   };

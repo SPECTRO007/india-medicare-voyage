@@ -52,7 +52,7 @@ export type Database = {
           action: string
           created_at: string
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           new_values: Json | null
           old_values: Json | null
           resource_id: string | null
@@ -64,7 +64,7 @@ export type Database = {
           action: string
           created_at?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           new_values?: Json | null
           old_values?: Json | null
           resource_id?: string | null
@@ -76,7 +76,7 @@ export type Database = {
           action?: string
           created_at?: string
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           new_values?: Json | null
           old_values?: Json | null
           resource_id?: string | null
@@ -708,7 +708,7 @@ export type Database = {
       }
       medical_records: {
         Row: {
-          consultation_id: string
+          consultation_id: string | null
           created_at: string
           description: string | null
           file_name: string
@@ -720,7 +720,7 @@ export type Database = {
           uploaded_by: string
         }
         Insert: {
-          consultation_id: string
+          consultation_id?: string | null
           created_at?: string
           description?: string | null
           file_name: string
@@ -732,7 +732,7 @@ export type Database = {
           uploaded_by: string
         }
         Update: {
-          consultation_id?: string
+          consultation_id?: string | null
           created_at?: string
           description?: string | null
           file_name?: string
